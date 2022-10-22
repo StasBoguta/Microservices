@@ -1,6 +1,5 @@
 package com.example.Microservices.repository;
 
-
 import com.example.Microservices.model.Mentors;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,13 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
 @Transactional(readOnly = true)
-public interface MentorRepository
-
-        extends JpaRepository<Mentors, Integer> {
-        Optional<Mentors> findById(int id);
+public interface MentorRepository extends JpaRepository<Mentors, Integer> {
+    Optional<Mentors> findById(int id);
 
     @Query(value = "Select distinct m from Mentors m ORDER BY m.rating DESC")
     List<Mentors> findMentorsBestRating(Pageable pageable);

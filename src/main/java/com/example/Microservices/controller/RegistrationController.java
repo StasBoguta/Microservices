@@ -1,10 +1,10 @@
 package com.example.Microservices.controller;
 
-
 import com.example.Microservices.exeptions.RegistrationException;
 import com.example.Microservices.model.DTO.UserDTO;
 import com.example.Microservices.service.RegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,29 +17,24 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/registration")
+@RequiredArgsConstructor
 public class RegistrationController {
 
-
-    @Autowired
-    RegistrationService registrationService;
-
-    public RegistrationController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
-    }
+    private final RegistrationService registrationService;
 
     //method for registration
     @Operation(summary = "method for registration (role can be equals only 'mentor' or 'mentee')")
     @PostMapping
     ResponseEntity<?> registration(@RequestBody UserDTO userDTO){
 
-        Map<String, String> res = new HashMap<>();
+        final Map<String, String> res = new HashMap<>();
 
-        try{
+        try {
             String result = registrationService.registration(userDTO);
             res.put("message", result);
             return ResponseEntity.status(201).body(res);
         }
-        catch(RegistrationException e){
+        catch(RegistrationException e) {
             res.put("message",e.getMessage());
             return ResponseEntity.badRequest().body(res);
         }

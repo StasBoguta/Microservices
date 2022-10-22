@@ -1,6 +1,5 @@
 package com.example.Microservices.repository;
 
-
 import com.example.Microservices.model.Accounts;
 import com.example.Microservices.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

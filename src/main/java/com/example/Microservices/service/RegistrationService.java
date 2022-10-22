@@ -6,30 +6,22 @@ import com.example.Microservices.model.DTO.UserDTO;
 import com.example.Microservices.repository.MenteeRepository;
 import com.example.Microservices.repository.MentorRepository;
 import com.example.Microservices.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-
 @Service
-public class RegistrationService{
+@RequiredArgsConstructor
+public class RegistrationService {
 
-    @Autowired
-    EmailService emailService;
-    PasswordService passwordService;
-    @Autowired
-    MentorRepository mentorRepository;
-    UserRepository userRepository;
-    MenteeRepository menteeRepository;
+    private final EmailService emailService;
+    private final PasswordService passwordService;
 
-    public RegistrationService(EmailService emailService, PasswordService passwordService, MentorRepository mentorRepository, UserRepository userRepository, MenteeRepository menteeRepository) {
-        this.emailService = emailService;
-        this.passwordService = passwordService;
-        this.mentorRepository = mentorRepository;
-        this.userRepository = userRepository;
-        this.menteeRepository = menteeRepository;
-    }
+    private final MentorRepository mentorRepository;
+    private final UserRepository userRepository;
+    private final MenteeRepository menteeRepository;
 
     public String registration(UserDTO userDTO) throws RegistrationException {
 
