@@ -2,34 +2,18 @@ version: '3'
 
 services:
 
-  adminer:
-    container_name: adminer
-    image: adminer
+  postgres:
+    container_name: postgresql
+    image: postgres:15
     restart: always
     ports:
-      - 8082:8080
-
-  mysql:
-    container_name: mysql
-    image: mysql:8.0.26
-    restart: always
-    ports:
-      - "3037:3036"
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mentor4you_db
-      MYSQL_USER: mentor4you
-      MYSQL_PASSWORD: 1234
-
-  mongodb:
-    container_name: mongodb
-    image: "mongo:5.0"
-    restart: always
-    ports:
-      - "27018:27017"
-      - "28017:28017"
-    environment:
-      MONGO_INITDB_DATABASE: mentor4you_db
+      POSTGRES_USER: mentor4you
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: mentor4you_db
+    networks:
+      - common
 
   backend:
     container_name: backend_mentor4you
@@ -41,23 +25,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - "mysql"
-      - "mongodb"
+      - "postgres"
     environment:
       SERVER_PORT: 8080
-      MONGODB_URI:mongodb: //mongodb:27017/mentor4you_db
-      MONGODB_STATUS_HOST: mongodb
-      MONGODB_STATUS_PORT: 28017
+    networks:
+      - common
 
-
-#  frontend:
-#    container_name: frontend_mentor4you
-#    image: frontend
-#    restart: always
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile
-#    ports:
-#    - "4200:4200"
-#    depends_on:
-#      - "backend"
+networks:
+  common:
+    driver: bridge

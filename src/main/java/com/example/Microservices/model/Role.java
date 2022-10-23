@@ -1,6 +1,6 @@
 package com.example.Microservices.model;
 
-public enum Role{
+public enum Role {
     ADMIN,
     MODERATOR,
     MENTOR,

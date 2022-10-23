@@ -1,0 +1,19 @@
+#setting for localhost
+spring:
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5432/mentor4you_db
+    username: mentor4you
+    password: 1234
+
+  #SQLDatabase setting
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+#JWT token
+jwt:
+  secret: mentor4you

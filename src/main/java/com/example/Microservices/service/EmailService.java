@@ -1,6 +1,7 @@
 package com.example.Microservices.service;
 
 import com.example.Microservices.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,16 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class EmailService {
 
-    @Autowired
-    UserRepository userRepository;
-
-
-    public EmailService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-
-    }
+    private final UserRepository userRepository;
 
     //check user email is existing in database
     public boolean emailExist(String email) {
@@ -35,6 +30,4 @@ public class EmailService {
 
         return (matcher.matches() && length < 130);
     }
-
-
 }
