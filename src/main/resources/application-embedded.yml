@@ -1,9 +1,8 @@
-#setting for localhost
 spring:
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/mentor4you_db
-    username: mentor4you
-    password: 1234
+    url: jdbc:h2:mem:${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   #SQLDatabase setting
   jpa:

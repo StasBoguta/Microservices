@@ -5,4 +5,5 @@ echo "Starting backend app"
 echo "********************************************************"
 
 java -Dserver.port=$SERVER_PORT \
-     -jar /usr/local/target/backend.jar
+     -Dspring.profiles.active=$DB_TYPE \
+     -jar /app/backend.jar

@@ -1,7 +1,7 @@
 FROM amazoncorretto:17
+EXPOSE 8080/tcp
 ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} backend.jar
-ADD run.sh run.sh
-RUN chmod +x run.sh
-CMD ./run.sh
-ENTRYPOINT ["java","-jar","/backend.jar"]
+COPY ${JAR_FILE} /app/backend.jar
+COPY run.sh /app/run.sh
+RUN chmod +x /app/run.sh
+CMD /app/run.sh

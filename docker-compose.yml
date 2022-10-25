@@ -28,6 +28,10 @@ services:
       - "postgres"
     environment:
       SERVER_PORT: 8080
+      DB_TYPE: separate
+      DB_NAME: mentor4you_db
+      DB_USER: mentor4you
+      DB_PASSWORD: 1234
     networks:
       - common
 
