@@ -2,18 +2,15 @@ version: '3'
 
 services:
 
-  postgres:
-    container_name: postgresql
-    image: postgres:15
+  mongodb:
+    container_name: mongodb
+    image: "mongo:5.0"
     restart: always
     ports:
-      - "5432:5432"
+      - "27018:27017"
+      - "28017:28017"
     environment:
-      POSTGRES_USER: mentor4you
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: mentor4you_db
-    networks:
-      - common
+      MONGO_INITDB_DATABASE: mentor4you_db
 
   backend:
     container_name: backend_mentor4you
@@ -23,15 +20,14 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
-      - "postgres"
+      - "mongodb"
     environment:
-      SERVER_PORT: 8080
-      DB_TYPE: separate
-      DB_NAME: mentor4you_db
-      DB_USER: mentor4you
-      DB_PASSWORD: 1234
+    SERVER_PORT: 8081
+      MONGODB_URI:mongodb: //mongodb:27017/mentor4you_db
+      MONGODB_STATUS_HOST: mongodb
+      MONGODB_STATUS_PORT: 28017
     networks:
       - common
 
