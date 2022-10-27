@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +47,20 @@ public class UserController {
     List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+
+    @Operation(summary = "select one user by request")
+    @PostMapping("/userByRequest{request}")
+    User getUserByRequest(@PathVariable HttpServletRequest request) {
+        return userService.getUserByRequest(request);
+    }
+
+    @Operation(summary = "select one user by id")
+    @PostMapping("/userById{id}")
+    User getUserByRequest(@PathVariable Integer id) {
+        return userService.getUserById(id);
+    }
+
 
     @Operation(summary = "change password")
     @PutMapping("/changePassword")

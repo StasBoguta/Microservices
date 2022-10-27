@@ -254,9 +254,14 @@ public class UserService {
         return getUserByHeader(header).getAvatar();
     }
 
-    public User getUserById(String id) {
-        int userId = Integer.parseInt(id);
-        return userRepository.findOneById(userId);
+    public User getUserByRequest(HttpServletRequest request){
+        String token = jwtProvider.getTokenFromRequest(request);
+        String email =jwtProvider.getLoginFromToken(token);
+        return userRepository.findUserByEmail(email);
+    }
+
+    public User getUserById(Integer id){
+        return userRepository.findOneById(id);
     }
 
     public String getAvatarByToken (String token) throws Exception{

@@ -4,12 +4,14 @@ package com.example.Microservices.service;
 import com.example.Microservices.exeptions.ChatNotFoundException;
 import com.example.Microservices.model.ChatMessage;
 import com.example.Microservices.model.ChatRoom;
+import com.example.Microservices.model.User;
 import com.example.Microservices.repository.ChatMessageRepository;
 import com.example.Microservices.repository.ChatRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,23 +23,31 @@ public class ChatService {
 
 
     @Autowired
-    JwtProvider jwtProvider;
-    UserRepository userRepository;
+
     ChatRoomRepository chatRoomRepository;
     ChatMessageRepository chatMessageRepository;
 
-    public ChatService(JwtProvider jwtProvider, UserRepository userRepository, ChatRoomRepository chatRoomRepository, ChatMessageRepository chatMessageRepository) {
-        this.jwtProvider = jwtProvider;
-        this.userRepository = userRepository;
-        this.chatRoomRepository = chatRoomRepository;
+    public ChatService(ChatRoomRepository chatRoomRepository, ChatMessageRepository chatMessageRepository) {
+               this.chatRoomRepository = chatRoomRepository;
         this.chatMessageRepository = chatMessageRepository;
+    }
+
+    public User findUserByRequest(HttpServletRequest request){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("http://localhost:8080/api/users/userByRequest/{request}" , User.class);
+
+    }
+
+    public User findUserById(Integer id){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("  http://localhost:8080/api/users/userById{id}" , User.class);
+
     }
 
 
     public Optional<ChatRoom> getRoom(HttpServletRequest request, String id) {
 
-        String token = jwtProvider.getTokenFromRequest(request);
-        String email = jwtProvider.getLoginFromToken(token);
+
         User user = userRepository.findUserByEmail(email);
 
         String userId = Integer.toString(user.getId());
@@ -51,8 +61,7 @@ public class ChatService {
 
     public ChatRoom createRoom(HttpServletRequest request, String id) {
 
-        String token = jwtProvider.getTokenFromRequest(request);
-        String email = jwtProvider.getLoginFromToken(token);
+
         User user = userRepository.findUserByEmail(email);
         String userId = Integer.toString(user.getId());
 
@@ -68,8 +77,7 @@ public class ChatService {
     }
 
     public List<ChatRoom> findMyRoom(HttpServletRequest request) {
-        String token = jwtProvider.getTokenFromRequest(request);
-        String email = jwtProvider.getLoginFromToken(token);
+
         User user = userRepository.findUserByEmail(email);
 
         List<ChatRoom> roomList = chatRoomRepository.findAllBySenderId(Integer.toString(user.getId()));

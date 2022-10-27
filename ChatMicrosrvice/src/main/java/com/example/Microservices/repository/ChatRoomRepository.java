@@ -2,8 +2,6 @@ package com.example.Microservices.repository;
 
 import com.example.Microservices.model.ChatMessage;
 import com.example.Microservices.model.ChatRoom;
-import com.mentor4you.model.ChatMessage;
-import com.mentor4you.model.ChatRoom;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
