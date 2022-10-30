@@ -17,7 +17,7 @@ services:
 
   backend:
     container_name: backend_mentor4you
-    image: backend
+    image: kraxmall/mentor4you:1
     restart: always
     build:
       context: ./
@@ -30,6 +30,7 @@ services:
       SERVER_PORT: 8080
       DB_TYPE: separate
       DB_HOST: postgresql
+      DB_PORT: 5432
       DB_NAME: mentor4you_db
       DB_USER: mentor4you
       DB_PASSWORD: 1234
