@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ChatMicrosrvice" />
         <module name="FunctionalMicrosrvice" />
+        <module name="FunctionalMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ChatMicrosrvice" options="-parameters" />
+      <module name="FunctionalMicroservice" options="-parameters" />
       <module name="FunctionalMicrosrvice" options="-parameters" />
       <module name="MainService" options="-parameters" />
     </option>
