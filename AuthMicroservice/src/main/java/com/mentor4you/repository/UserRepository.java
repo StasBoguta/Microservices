@@ -22,8 +22,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findUserByEmail(String email);
 
-    List<User> findByBan(Boolean bool);
-
     @Transactional
     @Modifying
     @Query("UPDATE User u SET u.last_name = ?1 WHERE u.id = ?2 and u.email like ?3")

@@ -38,42 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                //виключив csrf захист щоб можна було надсилати POST запити
                 .cors().and().csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                //TODO  chek all permits
-
-                .authorizeRequests().antMatchers("/api/auth/*",
-
-                                                 "/api/registration",
-                                                 "/api/users",
-                                                 "/api/users/getAllBannedUser",
-                                                 "/api/users/changeBanToUser",
-                                                 "/api/searchMentor",//dell,
-                                                 "/api/users/Test/{{id}}/{{name}}",//dell
-                                                 "/api/searchMentor/Test/{{contactLast}}/{{contactFirst}}",//dell
-                                                 "/api/mentors",//dell
-                                                 "/api/searchMentor/filterGetListSmallMentors/{{city}}/{{categoryName}}/{{language}}/{{minPrice}}/{{maxPrice}}",//dell
-                                                 "/api/searchMentor/findMentorsBestRating/{{number}}",//dell
-                                                 "/api/users/changeUser",//dell
-                                                 "/api/users/changeAvatar",
-                                                 "/api/users/changeRole",
-                                                 "/api/admin/appointModerator",
-                                                 "/api/users/uploadAvatar",
-                                                 "/api/users/deleteAvatar",
-                                                 "/api/mentors",
-                                                 "/api/emailToModerator/sendEmailToModer",// for ANY USER
-                                                 "/api/mentees/**",
-                                                 "/findmessage/{{sendid}}/{{recivid}}",
-                                                 "/api/mentors/{id}",
-                                                 "/sendSecurityEmail/{{sendTo}}",
-                                                 "/api/admin/addCategory",
-                                                 "/api/admin/deleteCategory"
-                                                 ).permitAll()
-
-
+                .authorizeRequests()
+                .antMatchers(
+                        "/api/auth/*",
+                        "/api/registration",
+                        "/api/users**")
+                .permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()

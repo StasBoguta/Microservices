@@ -1,9 +1,10 @@
 package com.mentor4you.model.DTO;
 
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class UserDTO{
+public class UserDTO {
 
     @NotNull
     @NotEmpty
