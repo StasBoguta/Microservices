@@ -12,7 +12,3 @@ spring:
   sql:
     init:
       mode: always
-
-#JWT token
-jwt:
-  secret: mentor4you

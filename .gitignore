@@ -5,6 +5,7 @@
 # IntelliJ
 # User-specific stuff
 out/
+target/
 .idea/
 *.iws
 *.iml
@@ -25,7 +26,6 @@ fabric.properties
 /.settings/
 /.metadata/
 /.recommenders/
-/target/*/
 /bin/
 /build/
 /doc/
@@ -81,3 +81,6 @@ ehthumbs_vista.db
 
 # Folder config file
 [Dd]esktop.ini
+
+### Custom ###
+command.txt
