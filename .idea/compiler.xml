@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MimeContentMicroservice" />
+        <module name="AuthMicroservice" />
         <module name="ChatMicrosrvice" />
         <module name="FunctionalMicrosrvice" />
-        <module name="FunctionalMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,10 +20,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AuthMicroservice" options="-parameters" />
       <module name="ChatMicrosrvice" options="-parameters" />
-      <module name="FunctionalMicroservice" options="-parameters" />
       <module name="FunctionalMicrosrvice" options="-parameters" />
       <module name="MainService" options="-parameters" />
+      <module name="MimeContentMicroservice" options="-parameters" />
     </option>
   </component>
 </project>

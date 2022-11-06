@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ChatMicrosrvice/pom.xml" />
         <option value="$PROJECT_DIR$/FunctionalMicrosrvice/pom.xml" />
+        <option value="$PROJECT_DIR$/MimeContentMicroservice/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
