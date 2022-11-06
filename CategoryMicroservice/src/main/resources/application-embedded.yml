@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  #SQLDatabase setting
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:/sql/data.sql

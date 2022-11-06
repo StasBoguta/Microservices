@@ -7,6 +7,7 @@
     <modules>
         <module>FunctionalMicroservice</module>
         <module>MimeContentMicroservice</module>
+        <module>CategoryMicroservice</module>
     </modules>
 
     <parent>
