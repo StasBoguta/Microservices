@@ -1,11 +1,8 @@
-package org.example.service;
+package com.mentor4you.service;
 
-import org.example.domain.Post;
-import org.example.domain.PostDTO;
+import com.mentor4you.domain.PostDTO;
 
 public interface PostService {
 
     Iterable<PostDTO> getAllPosts();
-
-    PostDTO getPostById(Integer id);
 }

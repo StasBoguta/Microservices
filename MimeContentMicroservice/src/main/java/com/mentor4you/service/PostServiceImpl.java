@@ -1,14 +1,13 @@
-package org.example.service;
+package com.mentor4you.service;
 
-import org.example.domain.Post;
-import org.example.domain.PostDTO;
-import org.example.domain.User;
-import org.example.repository.PostRepository;
+import com.mentor4you.domain.Post;
+import com.mentor4you.domain.PostDTO;
+import com.mentor4you.domain.User;
+import com.mentor4you.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -24,14 +23,6 @@ public class PostServiceImpl implements PostService {
                 .stream(postRepository.findAll().spliterator(), false)
                 .map(this::toPostDTO)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public PostDTO getPostById(Integer id) {
-        return postRepository
-                .findById(id)
-                .map(this::toPostDTO)
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Post with id=%s does not exist", id)));
     }
 
     private PostDTO toPostDTO(Post post) {
