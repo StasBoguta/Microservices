@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  #SQLDatabase setting
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+<<<<<<<< HEAD:MimeContentMicroservice/src/main/resources/application-embedded.yml
+      mode: always
+      data-locations: classpath:/sql/data.sql
+|||||||| 139e665:FunctionalMicrosrvice/src/main/resources/application-embedded.yml
+      mode: always
+
+#JWT token
+jwt:
+  secret: mentor4you
+========
+      mode: always
+>>>>>>>> origin/twomicroservice:FunctionalMicroservice/target/classes/application-embedded.yml
