@@ -13,14 +13,12 @@ public class UserDTO{
     @NotEmpty
     private final String password;
 
-    @NotNull
-    @NotEmpty
-    private final String role;
 
-    public UserDTO(String email, String password, String role) {
+
+    public UserDTO(String email, String password) {
         this.email = email;
         this.password = password;
-        this.role = role;
+
     }
 
     public String getEmail() {
@@ -29,9 +27,5 @@ public class UserDTO{
 
     public String getPassword() {
         return password;
-    }
-
-    public String getRole() {
-        return role;
     }
 }

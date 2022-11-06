@@ -36,10 +36,8 @@ public class AuthController {
         Map<String, String> res = new HashMap<>();
         try {
             String token = authenticationService.login(request);
-            String avatar = userService.getAvatarByToken(token);
             res.put("message","You have successfully logged in");
             res.put("token", token);
-            res.put("avatar",avatar);
             return ResponseEntity.ok(res);
         }catch (AuthenticationException ex) {
             res.put("message", ex.getMessage());
@@ -48,7 +46,6 @@ public class AuthController {
             exception.printStackTrace();
             return ResponseEntity.badRequest().body(res);
         }
-
     }
 
     @PutMapping("/logout")

@@ -21,11 +21,6 @@ public class User {
     private String password;
     private String first_name;
     private String last_name;
-    private String avatar;
-    private LocalDateTime registration_date;
-    private Boolean status;
-    private Boolean ban;
-
     @OneToOne (mappedBy = "user")
     private Accounts accounts;
 
@@ -37,20 +32,12 @@ public class User {
                 String password,
                 String first_name,
                 String last_name,
-                String avatar,
-                LocalDateTime registration_date,
-                Boolean status,
-                Boolean ban,
                 Accounts accounts) {
         this.role = role;
         this.email = email;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.avatar = avatar;
-        this.registration_date = registration_date;
-        this.status = status;
-        this.ban = ban;
         this.accounts = accounts;
     }
 
@@ -98,37 +85,6 @@ public class User {
         this.last_name = last_name;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public LocalDateTime getRegistration_date() {
-        return registration_date;
-    }
-
-    public void setRegistration_date(LocalDateTime registration_date) {
-        this.registration_date = registration_date;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public Boolean getBan() {
-        return ban;
-    }
-
-    public void setBan(Boolean ban) {
-        this.ban = ban;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -152,8 +108,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
-                ", registration_date=" + registration_date +
-                ", status=" + status +
                 ", accounts=" + accounts +
                 '}';
     }

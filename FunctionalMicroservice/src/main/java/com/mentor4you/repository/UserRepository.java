@@ -13,10 +13,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-
-
-    Optional<User> findById(int id);
-
     @Query("Select user from User user")
     List<User> findAll();
 
@@ -25,7 +21,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findOneById(int id);
 
     User findUserByEmail(String email);
-
 
     List<User> findByBan(Boolean bool);
 

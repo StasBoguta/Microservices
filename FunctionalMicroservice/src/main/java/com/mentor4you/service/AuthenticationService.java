@@ -52,10 +52,7 @@ public class AuthenticationService {
 
 
         if(new BCryptPasswordEncoder().matches(request.getPassword(),user.getPassword())){
-            if(!user.getStatus()){
-                throw new AuthenticationException("User been deleted");
-            }
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+           Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getEmail(),
                     request.getPassword()
             ));
