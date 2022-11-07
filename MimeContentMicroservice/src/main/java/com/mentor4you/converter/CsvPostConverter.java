@@ -16,7 +16,7 @@ public class CsvPostConverter implements ContentConverter<PostDTO> {
     @Override
     public String convert(Iterable<PostDTO> postDTOS) {
         try (StringWriter out = new StringWriter();
-             CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader("id", "title", "content"))) {
+             CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader("id", "title", "content", "authorId", "authorEmail", "authorRole", "categoryId", "categoryName"))) {
             postDTOS.forEach(postDTO -> {
                 try {
                     final String postDtoAsString = postDTOAsCsvString(postDTO);
@@ -34,6 +34,14 @@ public class CsvPostConverter implements ContentConverter<PostDTO> {
     }
 
     private String postDTOAsCsvString(PostDTO postDTO) {
-        return String.format("%s,%s,%s", postDTO.getId(), postDTO.getTitle(), postDTO.getContent());
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s",
+                postDTO.getId(),
+                postDTO.getTitle(),
+                postDTO.getContent(),
+                postDTO.getAuthor().getId(),
+                postDTO.getAuthor().getEmail(),
+                postDTO.getAuthor().getRole(),
+                postDTO.getCategory().getId(),
+                postDTO.getCategory().getName());
     }
 }

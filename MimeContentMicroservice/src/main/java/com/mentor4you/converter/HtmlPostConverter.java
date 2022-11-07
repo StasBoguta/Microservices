@@ -21,15 +21,29 @@ public class HtmlPostConverter implements ContentConverter<PostDTO> {
             <span>%s</span>
             <span>%s</span>
             <span>%s</span>
+            <span>%s</span>
+            <span>%s</span>
+            <span>%s</span>
+            <span>%s</span>
+            <span>%s</span>
             </div>
             """;
 
     @Override
     public String convert(Iterable<PostDTO> postDTOS) {
         final StringBuilder postsAsHtml = new StringBuilder();
-        postDTOS.forEach(post ->
+        postDTOS.forEach(postDTO ->
                 postsAsHtml
-                    .append(POST_PATTERN.formatted(post.getId(), post.getTitle(), post.getContent()).indent(8))
+                    .append(POST_PATTERN.formatted(
+                            postDTO.getId(),
+                            postDTO.getTitle(),
+                            postDTO.getContent(),
+                            postDTO.getAuthor().getId(),
+                            postDTO.getAuthor().getEmail(),
+                            postDTO.getAuthor().getRole(),
+                            postDTO.getCategory().getId(),
+                            postDTO.getCategory().getName())
+                    .indent(8))
                     .append('\n')
         );
         postsAsHtml.deleteCharAt(postsAsHtml.length() - 1);
