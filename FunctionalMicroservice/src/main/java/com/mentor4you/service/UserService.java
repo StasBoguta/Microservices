@@ -23,16 +23,13 @@ public class UserService {
     UserRepository userRepository;
     JwtProvider jwtProvider;
     AuthenticationService authenticationService;
-       AccountRepository accountRepository;
 
-    public UserService(ApplicationEventPublisher applicationEventPublisher, PasswordService passwordService, UserRepository userRepository, JwtProvider jwtProvider, AuthenticationService authenticationService,  AccountRepository accountRepository) {
+    public UserService(ApplicationEventPublisher applicationEventPublisher, PasswordService passwordService, UserRepository userRepository, JwtProvider jwtProvider, AuthenticationService authenticationService) {
         this.applicationEventPublisher = applicationEventPublisher;
         this.passwordService = passwordService;
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.authenticationService = authenticationService;
-
-        this.accountRepository = accountRepository;
     }
 
     public List<User> getAllUsers(){

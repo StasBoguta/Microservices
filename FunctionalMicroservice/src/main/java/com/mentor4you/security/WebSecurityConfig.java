@@ -46,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .accessDeniedPage("/api/auth/login")
                 .and()
                 //TODO  chek all permits
@@ -55,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
                 "/api/registration",
                 "/api/auth/login",
+                        "/api/auth/check",
                 "/api/Cooperation/cooperation",
                 "api/books/AllBooks",
                 "/api/prumirnuki/getAllPrumirnuki",

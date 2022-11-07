@@ -26,4 +26,7 @@ web:
     schema: http
     host: localhost
     port: 8081
-    path: /api/categories
+
+credentials:
+  email: mimeservice@gmail.com
+  password: 123Password

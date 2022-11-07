@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class LoginResponse {
 
-    private Integer id;
-    private String email;
-    private String role;
+    String token;
 }

@@ -19,7 +19,6 @@ public class RegistrationService{
     @Autowired
     UserRepository userRepository;
 
-
     public RegistrationService(EmailService emailService, PasswordService passwordService,UserRepository userRepository) {
         this.emailService = emailService;
         this.passwordService = passwordService;
@@ -35,7 +34,6 @@ public class RegistrationService{
         }
 
         User user = new User();
-        Accounts accounts = new Accounts();
         user.setEmail(email);
         user.setRole(Role.MENTEE);
 
@@ -47,8 +45,6 @@ public class RegistrationService{
 
         //encode password
         user.setPassword(passwordService.encodePassword(userDTO.getPassword()));
-
-        accounts.setUser(user);
 
         userRepository.save(user);
 

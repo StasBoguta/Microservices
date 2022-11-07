@@ -19,10 +19,6 @@ public class User {
     private String email;
 
     private String password;
-    private String first_name;
-    private String last_name;
-    @OneToOne (mappedBy = "user")
-    private Accounts accounts;
 
     public User() {
     }
@@ -30,15 +26,10 @@ public class User {
     public User(Role role,
                 String email,
                 String password,
-                String first_name,
-                String last_name,
                 Accounts accounts) {
         this.role = role;
         this.email = email;
         this.password = password;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.accounts = accounts;
     }
 
     public int getId() {
@@ -69,23 +60,6 @@ public class User {
         this.password = password;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,9 +80,6 @@ public class User {
                 ", role=" + role +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", accounts=" + accounts +
                 '}';
     }
 }

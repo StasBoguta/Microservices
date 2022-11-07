@@ -39,8 +39,8 @@ public class UserController {
     }
 
 
-    @PostMapping("/userById{id}")
-    User getUserByRequest(@PathVariable Integer id) {
+    @GetMapping("/{id}")
+    User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
 
