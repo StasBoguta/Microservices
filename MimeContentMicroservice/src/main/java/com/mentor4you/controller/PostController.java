@@ -51,11 +51,32 @@ public class PostController {
 
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<?> getAllPostsHtml() {
-        final Iterable<PostDTO> posts = postService.getAllPosts();
+        final Iterable<PostDTO> posts =
         final String postsAsHtml = htmlPostConverter.convert(posts);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
                 .body(postsAsHtml);
+    }
+
+    private Iterable<PostDTO> getPostsFromDTO() {
+        final Iterable<PostDTO> posts = postService.getAllPosts();
+    }
+
+    private PostDTO toPostDTO(Post post) {
+        try {
+            User author = userService.getUserById(post.getAuthorId());
+            return PostDTO.builder()
+                    .id(post.getId())
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .author(author)
+                    .build();
+        } catch(IllegalArgumentException ex) {
+            throw new IllegalArgumentException(
+                    String.format("Error retrieving post with id=%s: user with id=%s does not exist",
+                            post.getId(),
+                            post.getAuthorId()));
+        }
     }
 }

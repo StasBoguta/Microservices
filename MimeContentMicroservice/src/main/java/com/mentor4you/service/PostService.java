@@ -4,5 +4,5 @@ import com.mentor4you.domain.PostDTO;
 
 public interface PostService {
 
-    Iterable<PostDTO> getAllPosts();
+    Iterable<Post> getAllPosts();
 }

@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:h2:mem:${DB_NAME}
@@ -13,3 +16,14 @@ spring:
     init:
       mode: always
       data-locations: classpath:/sql/data.sql
+
+web:
+  auth-microservice:
+    schema: http
+    host: localhost
+    port: 8082
+  category-microservice:
+    schema: http
+    host: localhost
+    port: 8081
+    path: /api/categories

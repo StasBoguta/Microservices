@@ -27,4 +27,7 @@ public class Post {
 
     @Column(name="author_id", nullable = false)
     private Integer authorId;
+
+    @Column(name="category_id", nullable = false)
+    private Integer categoryId;
 }

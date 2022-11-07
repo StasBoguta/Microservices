@@ -18,27 +18,8 @@ public class PostServiceImpl implements PostService {
     private final UserService userService;
 
     @Override
-    public Iterable<PostDTO> getAllPosts() {
-        return StreamSupport
-                .stream(postRepository.findAll().spliterator(), false)
-                .map(this::toPostDTO)
-                .collect(Collectors.toList());
-    }
+    public Iterable<Post> getAllPosts() {
+        return postRepository.findAll();
 
-    private PostDTO toPostDTO(Post post) {
-        try {
-            User author = userService.getUserById(post.getAuthorId());
-            return PostDTO.builder()
-                    .id(post.getId())
-                    .title(post.getTitle())
-                    .content(post.getContent())
-                    .author(author)
-                    .build();
-        } catch(IllegalArgumentException ex) {
-            throw new IllegalArgumentException(
-                    String.format("Error retrieving post with id=%s: user with id=%s does not exist",
-                    post.getId(),
-                    post.getAuthorId()));
-        }
     }
 }
