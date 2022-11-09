@@ -2,33 +2,67 @@ version: '3'
 
 services:
 
-  postgres:
-    container_name: postgresql
-    image: postgres:15
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
     restart: always
     ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: mentor4you
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: mentor4you_db
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - common
 
-  backend:
-    container_name: backend_mentor4you
-    image: backend
+  auth_microservice:
+    container_name: auth-microservice
+    restart: always
+    build:
+      context: AuthMicroservice
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - "rabbitmq"
+    environment:
+      SERVER_PORT: 8080
+      DB_TYPE: embedded
+      DB_NAME: mentor4you_db
+      DB_USER: mentor4you
+      DB_PASSWORD: 1234
+    networks:
+      - common
+
+  mime_content_microservice:
+    container_name: mime-content-microservice
     restart: always
     build:
       context: MimeContentMicroservice
-      dockerfile: MimeContentMicroservice/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - "postgres"
+      - "rabbitmq"
     environment:
       SERVER_PORT: 8080
-      DB_TYPE: separate
+      DB_TYPE: embedded
+      DB_NAME: mentor4you_db
+      DB_USER: mentor4you
+      DB_PASSWORD: 1234
+    networks:
+      - common
+
+  category_microservice:
+    container_name: category-microservice
+    restart: always
+    build:
+      context: CategoryMicroservice
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - "rabbitmq"
+    environment:
+      SERVER_PORT: 8080
+      DB_TYPE: embedded
       DB_NAME: mentor4you_db
       DB_USER: mentor4you
       DB_PASSWORD: 1234

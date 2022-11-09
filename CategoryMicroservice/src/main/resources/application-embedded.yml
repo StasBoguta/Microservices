@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   datasource:
@@ -20,5 +20,5 @@ spring:
 web:
   auth-microservice:
     schema: http
-    host: localhost
-    port: 8082
+    host: auth-microservice
+    port: 8080
