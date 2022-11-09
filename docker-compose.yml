@@ -20,8 +20,8 @@ services:
     image: backend
     restart: always
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: MimeContentMicroservice
+      dockerfile: MimeContentMicroservice/Dockerfile
     ports:
       - "8080:8080"
     depends_on:
