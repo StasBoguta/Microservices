@@ -5,7 +5,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>FunctionalMicroservice</module>
+        <module>AuthMicroservice</module>
         <module>MimeContentMicroservice</module>
         <module>CategoryMicroservice</module>
     </modules>
