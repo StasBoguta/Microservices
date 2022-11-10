@@ -31,8 +31,15 @@ public class JmsConfiguration {
     }
 
     @Bean
-    public JmsTemplate jmsTemplate() {
+    public JmsTemplate queueJmsTemplate() {
         return new JmsTemplate(connectionFactory());
+    }
+
+    @Bean
+    public JmsTemplate topicJmsTemplate() {
+        JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory());
+        jmsTemplate.setPubSubDomain(true);
+        return jmsTemplate;
     }
 
     @Bean
@@ -44,10 +51,19 @@ public class JmsConfiguration {
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+    public DefaultJmsListenerContainerFactory queueJmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory
                 = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
+        return factory;
+    }
+
+    @Bean
+    public DefaultJmsListenerContainerFactory topicJmsListenerContainerFactory() {
+        DefaultJmsListenerContainerFactory factory
+                = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory());
+        factory.setPubSubDomain(true);
         return factory;
     }
 }

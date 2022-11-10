@@ -10,8 +10,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageReceiver {
 
-    @JmsListener(destination = ActiveMQProperties.QUEUE_NAME)
-    public void receive(String message) {
-        log.info("MessageReceiver received message: {}", message);
+    @JmsListener(destination = ActiveMQProperties.QUEUE_NAME, containerFactory = "queueJmsListenerContainerFactory")
+    public void receiveMessageFromQueue(String message) {
+        log.info("Queue MessageReceiver received message: {}", message);
+    }
+
+    @JmsListener(destination = ActiveMQProperties.TOPIC_NAME, containerFactory = "topicJmsListenerContainerFactory")
+    public void receiveMessageFromTopicFirst(String message) {
+        log.info("Topic MessageReceiver 1 received message: {}", message);
+    }
+
+    @JmsListener(destination = ActiveMQProperties.TOPIC_NAME, containerFactory = "topicJmsListenerContainerFactory")
+    public void receiveMessageFromTopicSecond(String message) {
+        log.info("Topic MessageReceiver 2 received message: {}", message);
     }
 }

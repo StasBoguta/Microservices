@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestJmsController {
 
-    private final JmsTemplate jmsTemplate;
+    private final JmsTemplate queueJmsTemplate;
+    private final JmsTemplate topicJmsTemplate;
     private static final String MESSAGE = "Hello, this is message number %s";
     public static int messageId = 0;
 
     @GetMapping
     public ResponseEntity<?> sendTestMessage() {
         log.info("Sending message with id={}", messageId);
-        jmsTemplate.convertAndSend(ActiveMQProperties.QUEUE_NAME, MESSAGE.formatted(messageId++));
+
+        String message = MESSAGE.formatted(messageId++);
+        queueJmsTemplate.convertAndSend(ActiveMQProperties.QUEUE_NAME, message);
+        topicJmsTemplate.convertAndSend(ActiveMQProperties.TOPIC_NAME, message);
+
         return ResponseEntity.ok().build();
     }
 }

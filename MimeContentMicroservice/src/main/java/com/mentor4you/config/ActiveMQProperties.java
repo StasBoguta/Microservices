@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 public class ActiveMQProperties {
 
     public static final String QUEUE_NAME = "defaultQueue";
+    public static final String TOPIC_NAME = "defaultTopic";
 
     String protocol;
     String host;
