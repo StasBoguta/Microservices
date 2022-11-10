@@ -3,12 +3,12 @@ version: '3'
 services:
 
   rabbitmq:
-    container_name: rabbitmq
-    image: rabbitmq:management
+    container_name: activemq
+    image: rmohr/activemq
     restart: always
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "61616:61616" # JMS
+      - "8161:8161" # Web UI
     networks:
       - common
 
