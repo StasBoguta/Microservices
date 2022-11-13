@@ -12,7 +12,6 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 public class WebClientProperties {
 
     Endpoint authMicroservice;
-    Endpoint categoryMicroservice;
 
     @Value
     @Builder

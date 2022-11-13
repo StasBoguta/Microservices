@@ -31,19 +31,19 @@ public class JmsConfiguration {
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory categoryJmsListenerContainerFactory() {
-        DefaultJmsListenerContainerFactory factory
-                = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory());
-        return factory;
+    public MessageConverter jacksonJmsMessageConverter() {
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setTargetType(MessageType.TEXT);
+        converter.setTypeIdPropertyName("_type");
+        return converter;
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory userJmsListenerContainerFactory() {
-        DefaultJmsListenerContainerFactory factory
-                = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory());
-        factory.setPubSubDomain(true);
-        return factory;
+    public JmsTemplate userTemplate() {
+        JmsTemplate jmsTemplate = new JmsTemplate();
+        jmsTemplate.setConnectionFactory(connectionFactory());
+        jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
+        jmsTemplate.setPubSubDomain(true);
+        return jmsTemplate;
     }
 }

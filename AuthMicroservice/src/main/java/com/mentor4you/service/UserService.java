@@ -1,50 +1,45 @@
 package com.mentor4you.service;
 
-
+import com.mentor4you.config.ActiveMQProperties;
+import com.mentor4you.event.EventType;
+import com.mentor4you.event.UpdateUserEvent;
 import com.mentor4you.model.*;
 import com.mentor4you.repository.*;
-import com.mentor4you.security.jwt.JwtProvider;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
+import lombok.RequiredArgsConstructor;
 
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    ApplicationEventPublisher applicationEventPublisher;
-    PasswordService passwordService;
-    UserRepository userRepository;
-    JwtProvider jwtProvider;
-    AuthenticationService authenticationService;
+    private final UserRepository userRepository;
 
-    public UserService(ApplicationEventPublisher applicationEventPublisher, PasswordService passwordService, UserRepository userRepository, JwtProvider jwtProvider, AuthenticationService authenticationService) {
-        this.applicationEventPublisher = applicationEventPublisher;
-        this.passwordService = passwordService;
-        this.userRepository = userRepository;
-        this.jwtProvider = jwtProvider;
-        this.authenticationService = authenticationService;
-    }
+    private final JmsTemplate jmsTemplate;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
+    public void updateUserEmail(Integer userId, String newEmail) {
+        userRepository.findById(userId).ifPresent(user -> {
+            user.setEmail(newEmail);
+            userRepository.save(user);
 
-    public User getUserByRequest(HttpServletRequest request){
-        String token = jwtProvider.getTokenFromRequest(request);
-        String email =jwtProvider.getLoginFromToken(token);
-        return userRepository.findUserByEmail(email);
+            UpdateUserEvent updateUserEvent = UpdateUserEvent.builder()
+                    .id(user.getId())
+                    .email(user.getEmail())
+                    .build();
+            jmsTemplate.convertAndSend(ActiveMQProperties.USER_EVENTS_TOPIC,
+                    updateUserEvent,
+                    message -> {
+                        message.setStringProperty("EVENT_TYPE", EventType.USER_UPDATE.getType());
+                        return message;
+                    });
+        });
     }
-
-    public User getUserById(Integer id){
-        return userRepository.findOneById(id);
-    }
-
 }

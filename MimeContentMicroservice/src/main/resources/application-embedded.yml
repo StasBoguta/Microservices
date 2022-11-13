@@ -27,11 +27,3 @@ web:
     schema: http
     host: auth-microservice
     port: 8080
-  category-microservice:
-    schema: http
-    host: category-microservice
-    port: 8080
-
-credentials:
-  email: mimeservice@gmail.com
-  password: 123Password

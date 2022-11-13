@@ -19,3 +19,8 @@ spring:
 
   main:
     allow-circular-references: true
+
+activemq:
+  protocol: tcp
+  host: rabbitmq
+  port: 61616

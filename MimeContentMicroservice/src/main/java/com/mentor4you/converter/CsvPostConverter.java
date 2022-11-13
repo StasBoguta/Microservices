@@ -40,7 +40,6 @@ public class CsvPostConverter implements ContentConverter<PostDTO> {
                 postDTO.getContent(),
                 postDTO.getAuthor().getId(),
                 postDTO.getAuthor().getEmail(),
-                postDTO.getAuthor().getRole(),
                 postDTO.getCategory().getId(),
                 postDTO.getCategory().getName());
     }

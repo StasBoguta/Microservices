@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@Component
 @Order(1)
 @RequiredArgsConstructor
 public class JwtFilter implements Filter {

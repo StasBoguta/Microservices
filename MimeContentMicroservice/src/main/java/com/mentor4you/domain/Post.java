@@ -28,6 +28,12 @@ public class Post {
     @Column(name="author_id", nullable = false)
     private Integer authorId;
 
+    @Column(name="author_email", nullable = false)
+    private String authorEmail;
+
     @Column(name="category_id", nullable = false)
     private Integer categoryId;
+
+    @Column(name="category_name", nullable = false)
+    private String categoryName;
 }

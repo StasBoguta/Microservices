@@ -1,4 +1,4 @@
-package com.mentor4you.domain;
+package com.mentor4you.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class UpdateUserEvent {
 
     private Integer id;
     private String email;

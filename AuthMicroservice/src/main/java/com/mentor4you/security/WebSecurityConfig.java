@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 "/api/registration",
                 "/api/auth/login",
                         "/api/auth/check",
+                "/api/users/**",
                 "/api/Cooperation/cooperation",
                 "api/books/AllBooks",
                 "/api/prumirnuki/getAllPrumirnuki",

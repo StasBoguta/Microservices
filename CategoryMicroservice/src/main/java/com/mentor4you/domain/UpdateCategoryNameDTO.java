@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class UpdateCategoryNameDTO {
 
-    private Integer id;
-    private String email;
+    private String name;
 }

@@ -21,4 +21,10 @@ public class Category {
 
     @Column(unique = true, nullable = false)
     private String name;
+
+    @Column(name="creator_id", nullable = false)
+    private Integer creatorId;
+
+    @Column(name="creator_email", nullable = false)
+    private String creatorEmail;
 }

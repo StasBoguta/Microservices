@@ -21,15 +21,4 @@ public class WebClientConfiguration {
                     webClientProperties.getAuthMicroservice().getPort()))
                 .build();
     }
-
-    @Bean
-    public WebClient categoryMicroserviceClient() {
-        return WebClient
-                .builder()
-                .baseUrl(String.format("%s://%s:%s",
-                        webClientProperties.getCategoryMicroservice().getSchema(),
-                        webClientProperties.getCategoryMicroservice().getHost(),
-                        webClientProperties.getCategoryMicroservice().getPort()))
-                .build();
-    }
 }

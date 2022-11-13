@@ -1,5 +1,5 @@
-INSERT INTO categories(name)
+INSERT INTO categories(name, creator_id, creator_email)
 VALUES
-    ('Personal'),
-    ('Professional'),
-    ('Popular');
+    ('Personal', 1, 'mentor@email.com'),
+    ('Professional', 1, 'mentor@email.com'),
+    ('Popular', 2, 'mentor@email.com');

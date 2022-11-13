@@ -3,9 +3,7 @@ package com.mentor4you.controller;
 import com.mentor4you.converter.ContentConverter;
 import com.mentor4you.domain.PostDTO;
 import com.mentor4you.service.AuthService;
-import com.mentor4you.service.CategoryService;
 import com.mentor4you.service.PostService;
-import com.mentor4you.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,12 +25,6 @@ public class PostControllerTest {
 
     @MockBean
     private PostService postService;
-
-    @MockBean
-    private UserService userService;
-
-    @MockBean
-    private CategoryService categoryService;
 
     @MockBean
     private AuthService authService;

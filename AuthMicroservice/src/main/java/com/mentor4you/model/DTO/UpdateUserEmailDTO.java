@@ -1,4 +1,4 @@
-package com.mentor4you.domain;
+package com.mentor4you.model.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class UpdateUserEmailDTO {
 
-    private Integer id;
     private String email;
 }
