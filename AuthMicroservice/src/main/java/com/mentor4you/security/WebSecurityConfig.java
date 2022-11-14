@@ -48,34 +48,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .exceptionHandling()
                 .accessDeniedPage("/api/auth/login")
                 .and()
-                //TODO  chek all permits
-
-                .authorizeRequests().antMatchers(
-
+                .authorizeRequests()
+                .antMatchers(
                 "/api/registration",
                 "/api/auth/login",
-                        "/api/auth/check",
+                "/api/auth/check",
                 "/api/users/**",
-                "/api/Cooperation/cooperation",
-                "api/books/AllBooks",
-                "/api/prumirnuki/getAllPrumirnuki",
-                "/api/books/updateBook{{booksId}}",
-                "/api/books/createBook",
-                "/api/users/delete",
-                "/api/Cooperation/allCoopToApprove",
-                "/api/Cooperation/confirmCooperation",
-                "/api/books/allBooksByAvtor"
-
-        ).permitAll()
-
-
+                "/actuator/**" )
+                .permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .apply(jwtConfigurer)
-        ;
-
+                .apply(jwtConfigurer);
     }
 
     @Bean

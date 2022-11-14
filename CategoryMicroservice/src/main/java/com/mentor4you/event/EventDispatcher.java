@@ -18,7 +18,6 @@ public class EventDispatcher {
 
     private final CategoryRepository categoryRepository;
 
-
     @JmsListener(destination = ActiveMQProperties.USER_EVENTS_TOPIC,
             containerFactory = "userJmsListenerContainerFactory",
             selector = "EVENT_TYPE = 'USER_UPDATE'")
