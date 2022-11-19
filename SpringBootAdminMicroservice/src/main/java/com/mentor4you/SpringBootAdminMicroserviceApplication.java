@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableAdminServer
 public class SpringBootAdminMicroserviceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringBootAdminMicroserviceApplication.class, args);
     }

@@ -25,11 +25,27 @@ spring:
       client:
         url: "http://admin-microservice:8080"
 
+  application:
+    name: "auth-microservice"
+
 management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: health, info, prometheus
+
+    enabled-by-default: true
+
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
 
 activemq:
   protocol: tcp

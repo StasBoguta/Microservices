@@ -21,11 +21,17 @@ spring:
       client:
         url: "http://admin-microservice:8080"
 
+  application:
+    name: "mime-content-microservice"
+
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  endpoint:
+    health:
+      show-details: always
 
 activemq:
   protocol: tcp

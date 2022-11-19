@@ -30,4 +30,5 @@ public class CategoryController {
         categoryService.updateCategoryName(categoryId, updateCategoryNameDTO.getName());
         return ResponseEntity.ok().build();
     }
+
 }
