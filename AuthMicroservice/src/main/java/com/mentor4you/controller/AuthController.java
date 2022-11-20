@@ -1,6 +1,7 @@
 package com.mentor4you.controller;
 
 
+import com.mentor4you.config.ActiveUsersMetrics;
 import com.mentor4you.exception.JwtAuthenticationException;
 import com.mentor4you.model.DTO.LoginDTO;
 import com.mentor4you.security.jwt.CustomUserDetails;
@@ -8,8 +9,6 @@ import com.mentor4you.security.jwt.cache.CurrentUser;
 import com.mentor4you.service.AuthenticationService;
 import com.mentor4you.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,6 @@ public class AuthController {
     @Autowired
     AuthenticationService authenticationService;
     UserService userService;
-    int activeUsers = 0;
 
     public AuthController(AuthenticationService authenticationService, UserService userService) {
         this.authenticationService = authenticationService;
@@ -36,7 +34,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginDTO request){
         Map<String, String> res = new HashMap<>();
         try {
-            activeUsers++;
             String token = authenticationService.login(request);
             res.put("message","You have successfully logged in");
             res.put("token", token);
@@ -52,7 +49,6 @@ public class AuthController {
         Map<String, String> res = new HashMap<>();
         String message = authenticationService.logout(request, user);
         res.put("message", message);
-        activeUsers--;
         return ResponseEntity.ok(res);
     }
 
@@ -67,8 +63,5 @@ public class AuthController {
             res.put("message",e.getMessage());
             return ResponseEntity.status(401).body(res);
         }
-    }
-    public int getActiveUsers() {
-        return activeUsers;
     }
 }

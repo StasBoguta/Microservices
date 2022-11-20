@@ -2,6 +2,7 @@ package com.mentor4you.service;
 
 import com.mentor4you.exception.JwtAuthenticationException;
 import com.mentor4you.model.DTO.LoginDTO;
+import com.mentor4you.model.Role;
 import com.mentor4you.model.User;
 import com.mentor4you.repository.UserRepository;
 import com.mentor4you.security.jwt.CustomUserDetails;
@@ -37,6 +38,9 @@ public class AuthenticationService {
     UserRepository userRepository;
     JwtProvider jwtProvider;
 
+    int activeMentors = 0;
+    int activeMentees = 0;
+
     public AuthenticationService(UserRepository userRepository, JwtProvider jwtProvider) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
@@ -50,13 +54,19 @@ public class AuthenticationService {
             throw new AuthenticationException("Email is incorrect");
         }
 
-
         if(new BCryptPasswordEncoder().matches(request.getPassword(),user.getPassword())){
            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getEmail(),
                     request.getPassword()
             ));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            if (user.getRole().equals(Role.MENTOR))
+                activeMentors++;
+
+            if (user.getRole().equals(Role.MENTEE))
+                activeMentees++;
+
             return jwtProvider.generateAuthToken(authentication);
         }
 
@@ -67,6 +77,14 @@ public class AuthenticationService {
         String token = jwtProvider.getTokenFromRequest(request);
         OnUserLogoutSuccessEvent logoutEventPublisher = new OnUserLogoutSuccessEvent(user.getUsername(),token);
         applicationEventPublisher.publishEvent(logoutEventPublisher);
+        User currentUser = userRepository.findUserByEmail(user.getUsername());
+
+        if (currentUser.getRole().equals(Role.MENTOR))
+            activeMentors--;
+
+        if (currentUser.getRole().equals(Role.MENTEE))
+            activeMentees--;
+
         return "You have successfully logout";
     }
   
@@ -81,4 +99,11 @@ public class AuthenticationService {
         throw new JwtAuthenticationException("Token is invalid");
     }
 
+    public int getActiveMentors() {
+        return activeMentors;
+    }
+
+    public int getActiveMentees() {
+        return activeMentees;
+    }
 }

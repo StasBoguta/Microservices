@@ -25,13 +25,23 @@ spring:
     name: "mime-content-microservice"
 
 management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
+
+    enabled-by-default: true
+
   endpoint:
     health:
       show-details: always
+    prometheus:
+      enabled: true
 
 activemq:
   protocol: tcp

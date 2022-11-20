@@ -1,21 +1,23 @@
 package com.mentor4you.service;
 
+import com.mentor4you.config.WatchedPostsMetrics;
 import com.mentor4you.domain.Category;
 import com.mentor4you.domain.Post;
 import com.mentor4you.domain.PostDTO;
 import com.mentor4you.domain.User;
 import com.mentor4you.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
+    @Autowired
+    private final WatchedPostsMetrics watchedPostsMetrics;
 
     private final PostRepository postRepository;
 
@@ -23,6 +25,7 @@ public class PostServiceImpl implements PostService {
     public Iterable<PostDTO> getAllPosts() {
         final List<PostDTO> result = new ArrayList<>();
         postRepository.findAll().forEach(post -> result.add(toPostDTO(post)));
+        watchedPostsMetrics.watchedPostsCounter.increment(1.0);
         return result;
     }
 

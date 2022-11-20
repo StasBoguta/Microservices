@@ -36,7 +36,7 @@ public class RegistrationService{
 
         User user = new User();
         user.setEmail(email);
-        user.setRole(Role.MENTEE);
+        user.setRole(userDTO.getRole());
 
         //checking user password is valid
         String password = userDTO.getPassword();
