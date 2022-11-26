@@ -16,10 +16,6 @@ spring:
     init:
       mode: always
       data-locations: classpath:/sql/data.sql
-  boot:
-    admin:
-      client:
-        url: "http://admin-microservice:8080"
 
   application:
     name: "category-microservice"

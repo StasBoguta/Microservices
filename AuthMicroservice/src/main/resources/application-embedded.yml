@@ -20,11 +20,6 @@ spring:
   main:
     allow-circular-references: true
 
-  boot:
-    admin:
-      client:
-        url: "http://admin-microservice:8080"
-
   application:
     name: "auth-microservice"
 

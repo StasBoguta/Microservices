@@ -8,7 +8,6 @@
         <module>AuthMicroservice</module>
         <module>MimeContentMicroservice</module>
         <module>CategoryMicroservice</module>
-        <module>SpringBootAdminMicroservice</module>
     </modules>
 
     <parent>
