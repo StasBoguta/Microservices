@@ -39,6 +39,10 @@ management:
     prometheus:
       enabled: true
 
+sentry:
+  dsn: https://ad0ba40f71274489a80b1c07e2fc6607@o4504249281085440.ingest.sentry.io/4504249282592768
+  traces-sample-rate: 1.0
+
 activemq:
   protocol: tcp
   host: rabbitmq

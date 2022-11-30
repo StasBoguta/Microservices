@@ -3,6 +3,7 @@ package com.mentor4you.controller;
 import com.mentor4you.exception.RegistrationException;
 import com.mentor4you.model.DTO.UserDTO;
 import com.mentor4you.service.RegistrationService;
+import io.sentry.Sentry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,7 @@ public class RegistrationController {
             return ResponseEntity.status(201).body(res);
         }
         catch(RegistrationException e){
+            Sentry.captureException(e);
             res.put("message",e.getMessage());
             return ResponseEntity.badRequest().body(res);
         }

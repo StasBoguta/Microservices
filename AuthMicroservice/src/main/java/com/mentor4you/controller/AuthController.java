@@ -9,6 +9,7 @@ import com.mentor4you.security.jwt.cache.CurrentUser;
 import com.mentor4you.service.AuthenticationService;
 import com.mentor4you.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.sentry.Sentry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,7 @@ public class AuthController {
             res.put("token", token);
             return ResponseEntity.ok(res);
         } catch (Exception exception) {
+            Sentry.captureException(exception);
             exception.printStackTrace();
             return ResponseEntity.badRequest().body(res);
         }

@@ -9,6 +9,7 @@ import com.mentor4you.security.jwt.CustomUserDetails;
 import com.mentor4you.security.jwt.JwtProvider;
 import com.mentor4you.security.jwt.cache.event.OnUserLogoutSuccessEvent;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.sentry.Sentry;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
