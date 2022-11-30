@@ -8,6 +8,8 @@
         <module>AuthMicroservice</module>
         <module>MimeContentMicroservice</module>
         <module>CategoryMicroservice</module>
+        <module>Gateway</module>
+        <module>EurekaServer</module>
     </modules>
 
     <parent>
@@ -35,6 +37,13 @@
                 <version>2.7.5</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2021.0.5</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

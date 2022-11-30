@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: mime_content_microservice_route
+          uri: http://mime-content-microservice:8080
+          predicates:
+            - Path=/api/posts
+        - id: category_microservice_route
+          uri: http://category-microservice:8080
+          predicates:
+            - Path=/api/categories/**
+        - id: auth_microservice_route
+          uri: http://auth-microservice:8080
+          predicates:
+            - Path=/api/auth/**, /api/registration/**, /api/users/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

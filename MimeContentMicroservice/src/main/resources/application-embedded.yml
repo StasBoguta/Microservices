@@ -39,9 +39,14 @@ management:
     prometheus:
       enabled: true
 
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://eureka-server:8761/eureka/"
+
 activemq:
   protocol: tcp
-  host: rabbitmq
+  host: activemq
   port: 61616
 
 web:

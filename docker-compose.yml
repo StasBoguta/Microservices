@@ -26,7 +26,7 @@ services:
     networks:
       - common
 
-  rabbitmq:
+  activemq:
     container_name: activemq
     image: rmohr/activemq
     restart: always
@@ -43,9 +43,10 @@ services:
       context: AuthMicroservice
       dockerfile: Dockerfile
     ports:
-      - "8082:8080"
+      - "8083:8080"
     depends_on:
-      - "rabbitmq"
+      - "activemq"
+      - "eureka-server"
     environment:
       SERVER_PORT: 8080
       DB_TYPE: embedded
@@ -62,9 +63,10 @@ services:
       context: MimeContentMicroservice
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
-      - "rabbitmq"
+      - "activemq"
+      - "eureka-server"
     environment:
       SERVER_PORT: 8080
       DB_TYPE: embedded
@@ -81,15 +83,42 @@ services:
       context: CategoryMicroservice
       dockerfile: Dockerfile
     ports:
-      - "8081:8080"
+      - "8082:8080"
     depends_on:
-      - "rabbitmq"
+      - "activemq"
+      - "eureka-server"
     environment:
       SERVER_PORT: 8080
       DB_TYPE: embedded
       DB_NAME: mentor4you_db
       DB_USER: mentor4you
       DB_PASSWORD: 1234
+    networks:
+      - common
+
+  eureka-server:
+    container_name: eureka-server
+    restart: always
+    build:
+      context: EurekaServer
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8761"
+    environment:
+      SERVER_PORT: 8761
+    networks:
+      - common
+
+  gateway:
+    container_name: gateway
+    restart: always
+    build:
+      context: Gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SERVER_PORT: 8080
     networks:
       - common
 

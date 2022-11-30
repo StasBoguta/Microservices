@@ -12,22 +12,13 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private final WebClient authMicroserviceClient;
-    private static final String path = "/api/auth/check";
+    private final AuthServiceFeignClient authServiceFeignClient;
 
     @Override
     public boolean isValidToken(String token) {
-        final Boolean isValid =
-                authMicroserviceClient
-                        .post()
-                        .uri(uriBuilder -> uriBuilder.path(path).build())
-                        .bodyValue(new TokenRequest(token))
-                        .exchangeToMono(this::responseToBoolean)
-                        .block();
-        return isValid != null && isValid;
-    }
-
-    private Mono<Boolean> responseToBoolean(ClientResponse response) {
-        return Mono.just(response.statusCode().compareTo(HttpStatus.OK) == 0);
+        return authServiceFeignClient
+                .checkToken(new TokenRequest(token))
+                .getStatusCode()
+                .equals(HttpStatus.OK);
     }
 }
