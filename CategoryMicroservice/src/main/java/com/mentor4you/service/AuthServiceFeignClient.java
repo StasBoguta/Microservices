@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
         value = "auth-service",
-        url = "http://auth-service:8080")
+        url = "http://auth-microservice:8080")
 public interface AuthServiceFeignClient {
 
-    @PostMapping("/api/auth/token")
+    @PostMapping("/api/auth/check")
     ResponseEntity<String> checkToken(@RequestBody TokenRequest tokenRequest);
 }

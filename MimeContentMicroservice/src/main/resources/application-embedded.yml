@@ -54,3 +54,7 @@ web:
     schema: http
     host: auth-microservice
     port: 8080
+
+credentials:
+  login: "mentor@email.com"
+  password: "123Password"

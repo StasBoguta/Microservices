@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  autoconfigure:
+    exclude: net.devh.boot.grpc.server.autoconfigure.GrpcServerSecurityAutoConfiguration
+
   datasource:
     url: jdbc:h2:mem:${DB_NAME}
     username: ${DB_USER}

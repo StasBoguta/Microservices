@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Autowired
     JwtConfigurer jwtConfigurer;
 
-
     public WebSecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
@@ -52,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .antMatchers(
                 "/api/registration",
                 "/api/auth/login",
+                        "/api/auth/login/proto",
                 "/api/auth/check",
                 "/api/users/**",
                 "/actuator/**" )

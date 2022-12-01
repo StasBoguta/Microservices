@@ -4,5 +4,5 @@ public interface AuthService {
 
     boolean isValidToken(String token);
 
-    String login(String email, String password);
+    String login();
 }

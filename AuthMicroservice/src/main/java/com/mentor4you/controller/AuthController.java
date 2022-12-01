@@ -59,7 +59,7 @@ public class AuthController {
             String message = authenticationService.checkExpiration(request.get("token"));
             res.put("message", message);
             return ResponseEntity.ok(res);
-        }catch (JwtAuthenticationException | ExpiredJwtException e){
+        }catch (Exception e){
             res.put("message",e.getMessage());
             return ResponseEntity.status(401).body(res);
         }
