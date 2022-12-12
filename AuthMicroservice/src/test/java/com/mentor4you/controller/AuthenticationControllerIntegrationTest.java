@@ -29,8 +29,7 @@ public class AuthenticationControllerIntegrationTest {
       new GenericContainer<>(
               new ImageFromDockerfile()
                   .withDockerfile(
-                      Path.of(
-                          "C:\\Users\\Victor\\IdeaProjects\\Microservices\\AuthMicroservice\\Dockerfile")))
+                      Path.of(".", "..", "UserMicroservice", "Dockerfile")))
           .withExposedPorts(8080);
 
   @BeforeAll

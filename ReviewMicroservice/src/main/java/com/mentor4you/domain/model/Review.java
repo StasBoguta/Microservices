@@ -19,19 +19,19 @@ public class Review {
   @Column(name = "mentee_id", nullable = false)
   private Integer menteeId;
 
-  @Column(name = "mentee_first_name", nullable = false)
+  @Column(name = "mentee_first_name")
   private String menteeFirstName;
 
-  @Column(name = "mentee_last_name", nullable = false)
+  @Column(name = "mentee_last_name")
   private String menteeLastName;
 
   @Column(name = "mentor_id", nullable = false)
   private Integer mentorId;
 
-  @Column(name = "mentor_first_name", nullable = false)
+  @Column(name = "mentor_first_name")
   private String mentorFirstName;
 
-  @Column(name = "mentor_last_name", nullable = false)
+  @Column(name = "mentor_last_name")
   private String mentorLastName;
 
   @Column(nullable = true)

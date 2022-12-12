@@ -9,7 +9,6 @@ import lombok.*;
 @Builder
 public class AddReviewDTO {
 
-  private Integer id;
   private Integer menteeId;
   private Integer mentorId;
   private String text;
