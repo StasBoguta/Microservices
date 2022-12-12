@@ -43,16 +43,11 @@ services:
       context: AuthMicroservice
       dockerfile: Dockerfile
     ports:
-      - "8083:8080"
+      - "8084:8080"
     depends_on:
-      - "activemq"
       - "eureka-server"
     environment:
       SERVER_PORT: 8080
-      DB_TYPE: embedded
-      DB_NAME: mentor4you_db
-      DB_USER: mentor4you
-      DB_PASSWORD: 1234
     networks:
       - common
     deploy:
@@ -64,11 +59,11 @@ services:
           cpus: '0.20'
           memory: 128M
 
-  mime_content_microservice:
-    container_name: mime-content-microservice
+  user_microservice:
+    container_name: user-microservice
     restart: always
     build:
-      context: MimeContentMicroservice
+      context: UserMicroservice
       dockerfile: Dockerfile
     ports:
       - "8081:8080"
@@ -92,14 +87,42 @@ services:
           cpus: '0.20'
           memory: 128M
 
-  category_microservice:
-    container_name: category-microservice
+  cooperation_microservice:
+    container_name: cooperation-microservice
     restart: always
     build:
-      context: CategoryMicroservice
+      context: CooperationMicroservice
       dockerfile: Dockerfile
     ports:
       - "8082:8080"
+    depends_on:
+      - "activemq"
+      - "eureka-server"
+    environment:
+      SERVER_PORT: 8080
+      DB_TYPE: embedded
+      DB_NAME: mentor4you_db
+      DB_USER: mentor4you
+      DB_PASSWORD: 1234
+    networks:
+      - common
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 256M
+        reservations:
+          cpus: '0.20'
+          memory: 128M
+
+  review_microservice:
+    container_name: review-microservice
+    restart: always
+    build:
+      context: ReviewMicroservice
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"
     depends_on:
       - "activemq"
       - "eureka-server"
@@ -127,7 +150,7 @@ services:
       context: EurekaServer
       dockerfile: Dockerfile
     ports:
-      - "8084:8761"
+      - "8085:8761"
     environment:
       SERVER_PORT: 8761
     networks:

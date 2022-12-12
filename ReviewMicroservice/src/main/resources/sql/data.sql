@@ -1,0 +1,2 @@
+INSERT INTO reviews(mentee_id, mentee_first_name, mentee_last_name, mentor_id, mentor_first_name, mentor_last_name, text, rating, created_at)
+VALUES (1, 'Bob', 'Ross', 1, 'John', 'Doe', 'Such a great mentor!', 4, SELECT EXTRACT (EPOCH from CURRENT_TIMESTAMP()) * 1000);

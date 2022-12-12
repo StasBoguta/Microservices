@@ -1,0 +1,8 @@
+package com.mentor4you.exception;
+
+public class EntityNotFoundException extends RuntimeException {
+
+    public EntityNotFoundException(String message) {
+        super(message);
+    }
+}

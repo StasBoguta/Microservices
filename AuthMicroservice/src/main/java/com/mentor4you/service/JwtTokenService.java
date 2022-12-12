@@ -1,29 +1,63 @@
 package com.mentor4you.service;
 
-import com.mentor4you.grpc.JwtTokenCheckRequest;
-import com.mentor4you.grpc.JwtTokenCheckResponse;
-import io.grpc.stub.StreamObserver;
-import lombok.RequiredArgsConstructor;
-import net.devh.boot.grpc.server.service.GrpcService;
-import org.springframework.http.ResponseEntity;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import org.springframework.stereotype.Service;
 
-@GrpcService
-@RequiredArgsConstructor
-public class JwtTokenService extends com.mentor4you.grpc.JwtTokenServiceGrpc.JwtTokenServiceImplBase {
+@Service
+public class JwtTokenService {
 
-    private final AuthenticationService authenticationService;
+  private final HashMap<Integer, String> usersTokens;
 
-    @Override
-    public void checkToken(JwtTokenCheckRequest request, StreamObserver<JwtTokenCheckResponse> responseObserver) {
-        authenticationService.checkExpiration(request.getToken());
-        JwtTokenCheckResponse jwtTokenCheckResponse = null;
-        try{
-            authenticationService.checkExpiration(request.getToken());
-            jwtTokenCheckResponse = JwtTokenCheckResponse.newBuilder().setIsValid(true).build();
-        }catch (Exception e){
-            jwtTokenCheckResponse = JwtTokenCheckResponse.newBuilder().setIsValid(false).build();
-        }
-        responseObserver.onNext(jwtTokenCheckResponse);
-        responseObserver.onCompleted();
+  private final Key key;
+  private final SignatureAlgorithm signatureAlgorithm;
+  private static final Long EXPIRATION_TIME_MILLIS = 60L * 60L * 1000; // 1 hour
+
+  public JwtTokenService() {
+    this.key = MacProvider.generateKey();
+    this.signatureAlgorithm = SignatureAlgorithm.HS512;
+    this.usersTokens = new HashMap<>();
+  }
+
+  public String createToken(Integer userId, String userEmail, String userRole) {
+    Date issuedAt = new Date();
+    Date expiration = new Date(issuedAt.getTime() + EXPIRATION_TIME_MILLIS);
+
+    final Claims claims = Jwts.claims();
+    claims.setSubject(userEmail);
+    claims.put("id", userId);
+    claims.put("role", userRole);
+
+    final String token =
+        Jwts.builder()
+            .setClaims(claims)
+            .setIssuedAt(issuedAt)
+            .setExpiration(expiration)
+            .signWith(signatureAlgorithm, key)
+            .compact();
+    usersTokens.put(userId, token);
+    return token;
+  }
+
+  public boolean isValidToken(String token) {
+    try {
+      Jwts.parser().setSigningKey(key).parse(token);
+      return true;
+    } catch(Exception ex) {
+      return false;
     }
+  }
+
+  public String getToken(Integer userId) {
+    return usersTokens.get(userId);
+  }
+
+  public void deleteToken(Integer userId) {
+    usersTokens.remove(userId);
+  }
 }

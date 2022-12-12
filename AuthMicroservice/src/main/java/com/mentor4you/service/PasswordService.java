@@ -1,22 +1,21 @@
 package com.mentor4you.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PasswordService {
 
-    //check is valid password
-     public boolean isValidPassword(String password){
-         String reqExp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
-         return password.matches(reqExp);
-     }
+  private final PasswordEncoder passwordEncoder;
 
-     public String encodePassword(String password){
-         return new BCryptPasswordEncoder().encode(password);
-     }
+  public String encodePassword(String password) {
+    return passwordEncoder.encode(password);
+  }
 
-    public boolean equalsPassword(String password,String userPassword){
-        return new BCryptPasswordEncoder().matches(password,userPassword);
-    }
+  public boolean passwordsEqual(String password, String userPassword) {
+    return passwordEncoder.matches(password, userPassword);
+  }
 }

@@ -1,7 +1,0 @@
-syntax = "proto3";
-package com.mentor4you;
-option java_package = "com.mentor4you.model.proto";
-
-message JwtTokenProto {
-  string token = 1;
-}

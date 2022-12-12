@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  autoconfigure:
+    exclude: net.devh.boot.grpc.server.autoconfigure.GrpcServerSecurityAutoConfiguration
+
+  application:
+    name: "auth-microservice"
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+    enabled-by-default: true
+
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://eureka-server:8761/eureka/"
+
+activemq:
+  protocol: tcp
+  host: activemq
+  port: 61616

@@ -1,0 +1,7 @@
+spring:
+  autoconfigure:
+    exclude: net.devh.boot.grpc.server.autoconfigure.GrpcServerSecurityAutoConfiguration, org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration
+
+  cloud:
+    discovery:
+      enabled: false

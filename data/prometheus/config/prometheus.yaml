@@ -1,0 +1,32 @@
+scrape_configs:
+  - job_name: 'AuthMicroserviceMetrics'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['auth-microservice:8080']
+        labels:
+          application: 'Auth Microservice'
+
+  - job_name: 'CooperationMicroserviceMetrics'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: [ 'cooperation-microservice:8080' ]
+        labels:
+          application: 'Cooperation Microservice'
+
+  - job_name: 'ReviewMicroserviceMetrics'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: [ 'review-microservice:8080' ]
+        labels:
+          application: 'Review Microservice'
+
+  - job_name: 'UserMicroserviceMetrics'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: [ 'user-microservice:8080' ]
+        labels:
+          application: 'User Microservice'

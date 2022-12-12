@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  #SQLDatabase setting
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:/sql/data.sql
+
+  application:
+    name: "review-microservice"
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+    enabled-by-default: true
+
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://eureka-server:8761/eureka/"
+
+activemq:
+  protocol: tcp
+  host: activemq
+  port: 61616
+
+grpc:
+  server-url: "auth-microservice:9090"

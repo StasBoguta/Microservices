@@ -8,18 +8,25 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: mime_content_microservice_route
-          uri: http://mime-content-microservice:8080
+        - id: user_microservice_route
+          uri: http://user-microservice:8080
           predicates:
-            - Path=/api/posts
-        - id: category_microservice_route
-          uri: http://category-microservice:8080
+            - Path=/api/users/**, /api/mentors/**, /api/mentees/**
+
+        - id: review_microservice_route
+          uri: http://review-microservice:8080
           predicates:
-            - Path=/api/categories/**
+            - Path=/api/reviews/**
+
+        - id: cooperation_microservice_route
+          uri: http://cooperation-microservice:8080
+          predicates:
+            - Path=/api/categories/**, /api/pricelists/**
+
         - id: auth_microservice_route
           uri: http://auth-microservice:8080
           predicates:
-            - Path=/api/auth/**, /api/registration/**, /api/users/**
+            - Path=/api/auth/**, /api/registration/**
 
 management:
   endpoints:
