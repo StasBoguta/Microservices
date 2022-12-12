@@ -11,8 +11,6 @@ import com.mentor4you.exception.RegistrationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
@@ -24,7 +22,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   @Override
   public void registerUser(RegisterUserDTO registerUserDTO) {
-    if(userExists(registerUserDTO.getEmail())) {
+    if (userExists(registerUserDTO.getEmail())) {
       throw new RegistrationException("User with provided email already exists");
     }
 

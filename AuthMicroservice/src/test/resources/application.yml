@@ -5,3 +5,10 @@ spring:
   cloud:
     discovery:
       enabled: false
+
+web:
+  user-service:
+    url: http://localhost:8080
+    users-endpoint: /api/users
+    mentors-endpoint: /api/mentors
+    mentees-endpoint: /api/mentees

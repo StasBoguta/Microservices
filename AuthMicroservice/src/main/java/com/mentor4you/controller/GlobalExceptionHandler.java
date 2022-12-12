@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({EntityNotFoundException.class})
-    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
+  @ExceptionHandler({EntityNotFoundException.class})
+  public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+  }
 
-    @ExceptionHandler({RegistrationException.class, LoginException.class})
-    public ResponseEntity<?> handleAuthenticationExceptions(RuntimeException ex) {
-        return ResponseEntity.badRequest().body(ex.getMessage());
-    }
+  @ExceptionHandler({RegistrationException.class, LoginException.class})
+  public ResponseEntity<?> handleAuthenticationExceptions(RuntimeException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
 }

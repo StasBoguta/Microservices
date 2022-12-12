@@ -48,7 +48,7 @@ public class JwtTokenService {
     try {
       Jwts.parser().setSigningKey(key).parse(token);
       return true;
-    } catch(Exception ex) {
+    } catch (Exception ex) {
       return false;
     }
   }

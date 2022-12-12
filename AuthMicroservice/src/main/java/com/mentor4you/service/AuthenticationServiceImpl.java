@@ -8,8 +8,6 @@ import com.mentor4you.exception.LoginException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -27,7 +25,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     return new JwtTokenResponse(
-            jwtTokenService.createToken(user.getId(), user.getEmail(), user.getRole()));
+        jwtTokenService.createToken(user.getId(), user.getEmail(), user.getRole()));
   }
 
   @Override

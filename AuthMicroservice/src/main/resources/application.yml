@@ -36,3 +36,16 @@ activemq:
   protocol: tcp
   host: activemq
   port: 61616
+
+logging:
+  level:
+    ROOT: ERROR
+    org.testcontainers: INFO
+    com.github.dockerjava: WARN
+
+web:
+  user-service:
+    url: http://user-microservice:8080
+    users-endpoint: /api/users
+    mentors-endpoint: /api/mentors
+    mentees-endpoint: /api/mentees

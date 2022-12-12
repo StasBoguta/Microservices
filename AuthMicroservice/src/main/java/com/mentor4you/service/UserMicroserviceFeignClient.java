@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "user-microservice", url = "http://user-microservice:8080")
+@FeignClient(value = "user-microservice", url = "${web.user-service.url}")
 public interface UserMicroserviceFeignClient {
 
-  @GetMapping("/api/users")
+  @GetMapping("${web.user-service.users-endpoint}")
   ResponseEntity<User> getUserByEmail(@RequestParam(name = "email") String email);
 
-  @PostMapping("/api/users")
+  @PostMapping("${web.user-service.users-endpoint}")
   ResponseEntity<User> addUser(@RequestBody AddUserDTO addUserDTO);
 
-  @PostMapping("/api/mentors")
+  @PostMapping("${web.user-service.mentors-endpoint}")
   ResponseEntity<?> addMentor(@RequestBody AddMentorDTO addMentorDTO);
 
-  @PostMapping("/api/mentees")
+  @PostMapping("${web.user-service.mentees-endpoint}")
   ResponseEntity<?> addMentee(@RequestBody AddMenteeDTO addMenteeDTO);
 }
